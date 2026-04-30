@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biciclette Personalizzate – Bican</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <section class="hero">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_01.jpg" class="slide active" alt="">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_02.jpg" class="slide" alt="">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_03.jpg" class="slide" alt="">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_04.jpg" class="slide" alt="">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_05.jpg" class="slide" alt="">
+    <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_06.jpg" class="slide" alt="">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="http://bican.it/img/logo_header.png" alt="Logo Bican">
+      <p class="hero-tagline">Finalmente un telaio leggero a marchio Bican</p>
+    </div>
+  </section>
+
+  <section class="section">
+
+    <div class="section-header reveal">
+      <span class="section-label">Su misura per te</span>
+      <h2>Biciclette Personalizzate</h2>
+      <div class="divider"></div>
+    </div>
+
+    <p class="body-text reveal reveal-delay-1">
+      Abbiamo progettato telai in carbonio completamente personalizzabili, disponibili in tre varianti
+      tecnologiche a seconda delle esigenze, a un prezzo accessibile. Il telaio scelto potrà essere
+      verniciato nel colore desiderato, con accessori personalizzati: dal cambio ai freni, dalla sella
+      al manubrio.
+    </p>
+
+    <p class="body-text reveal reveal-delay-2">
+      È possibile un assemblaggio personalizzato con gruppi <strong>Shimano, Campagnolo, SRAM</strong> e
+      altre marche, con colori e loghi personalizzati. <strong>Tutti i nostri telai sono garantiti a vita.</strong>
+    </p>
+
+    <p class="body-text reveal reveal-delay-3">
+      La bicicletta che hai sempre desiderato ora può essere realtà — su una piuma! 
+    </div>
+
+  </section>
+
+  <!-- CARD MODELLI -->
+  <div class="cards-flex">
+
+    <div class="expand-card reveal reveal-delay-1"
+         data-title="BICAN C1"
+         data-text="Le nostre biciclette personalizzate sono un segno distintivo di qualità e performance. Telaio in carbonio di prima scelta, gruppi di alta qualità assemblati dal nostro personale nella nostra officina. Verniciatura e grafica completamente personalizzabili."
+         data-img="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_07.jpg">
+      <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_07.jpg" alt="BICAN C1">
+      <div class="expand-title">BICAN C1</div>
+    </div>
+
+    <div class="expand-card reveal reveal-delay-2"
+         data-title="BICAN C2"
+         data-text="Il nostro modello di punta per i ciclisti più esigenti. Telaio in carbonio ad alte prestazioni, componenti premium, geometria da competizione. Ogni dettaglio è pensato per chi vuole il massimo in termini di leggerezza e rigidità."
+         data-img="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_08.jpg">
+      <img src="http://bican.it/media/images/biciclette_pro/bican_biciclette_pro_08.jpg" alt="BICAN C2">
+      <div class="expand-title">BICAN C2</div>
+    </div>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <img class="modal-img" id="modal-img" src="" alt="">
+      <div class="modal-body">
+        <h2 id="modal-title"></h2>
+        <p id="modal-text"></p>
+        <button class="modal-close" id="modal-close">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal      = document.getElementById('modal');
+      const modalImg   = document.getElementById('modal-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalText  = document.getElementById('modal-text');
+      const modalClose = document.getElementById('modal-close');
+
+      document.querySelectorAll('.expand-card').forEach(card => {
+        card.addEventListener('click', () => {
+          modalImg.src        = card.dataset.img;
+          modalTitle.textContent = card.dataset.title;
+          modalText.textContent  = card.dataset.text;
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    });
+  </script>
+</body>
+</html>
