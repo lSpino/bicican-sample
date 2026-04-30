@@ -1,6 +1,6 @@
 /* shared.js — caricato da tutte le pagine */
 
-// ── Carica navbar e footer ──────────────────────────────────────────────────
+// ── Carica componenti ───────────────────────────────────────────────────────
 async function loadComponent(id, file) {
   try {
     const res  = await fetch(file);
@@ -12,7 +12,7 @@ async function loadComponent(id, file) {
   }
 }
 
-// ── Evidenzia il link attivo nella navbar ────────────────────────────────────
+// ── Evidenzia il link attivo nella navbar ───────────────────────────────────
 function setActiveNav() {
   const page = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('nav a').forEach(a => {
@@ -23,20 +23,25 @@ function setActiveNav() {
   });
 }
 
-// ── Scroll reveal ────────────────────────────────────────────────────────────
+// ── Scroll reveal ───────────────────────────────────────────────────────────
 function initReveal() {
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('show');
+    });
   }, { threshold: 0.15 });
+
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
 
-// ── Hero slider ──────────────────────────────────────────────────────────────
+// ── Hero slider ─────────────────────────────────────────────────────────────
 function initSlider() {
   const slides = document.querySelectorAll('.slide');
   if (slides.length < 2) return;
+
   let i = 0;
   slides[0].classList.add('active');
+
   setInterval(() => {
     slides[i].classList.remove('active');
     i = (i + 1) % slides.length;
@@ -44,11 +49,19 @@ function initSlider() {
   }, 4500);
 }
 
-// ── Bootstrap ────────────────────────────────────────────────────────────────
+// ── Bootstrap ───────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+
   await loadComponent('navbar', 'navbar.html');
+
+  // 👉 carica hero SOLO se presente nella pagina
+  if (document.getElementById('hero')) {
+    await loadComponent('hero', 'hero.html');
+  }
+
   await loadComponent('footer', 'footer.html');
+
   setActiveNav();
   initReveal();
-  initSlider();
+  initSlider(); // funziona perché hero è già caricato
 });
