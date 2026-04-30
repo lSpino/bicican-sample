@@ -54,14 +54,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await loadComponent('navbar', 'navbar.html');
 
-  // 👉 carica hero SOLO se presente nella pagina
-  if (document.getElementById('hero')) {
-    await loadComponent('hero', 'hero.html');
-  }
+  await loadComponent('hero', 'hero.html');
+
+  requestAnimationFrame(() => {
+    initSlider();
+  });
 
   await loadComponent('footer', 'footer.html');
 
   setActiveNav();
   initReveal();
-  initSlider(); // funziona perché hero è già caricato
 });
